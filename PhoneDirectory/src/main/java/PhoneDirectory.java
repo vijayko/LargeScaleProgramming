@@ -1,18 +1,19 @@
 package main.java;
 
+import main.resources.*;
+
 import java.io.*;
 import java.util.*;
 
 public class PhoneDirectory{
 	Properties prop = new Properties();
-	//Set temps;
-	InputStream inputStream;
-	FileInputStream in;
+	FileInputStream inputStream;
 	FileOutputStream output;
 	File f;
-	public void populateFromFile(String propFileName) throws IOException {
+	//This method populate the prop object with the content in the phone.properties
+	public void populateFromFile() throws IOException {
 		try {
-			inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+			inputStream = new FileInputStream("/Users/vijay/Code/PhoneDirectory/src/main/resources/phone.properties");
 			if (inputStream != null){
 				prop.load(inputStream);
 			} else {
@@ -25,6 +26,7 @@ public class PhoneDirectory{
 		}
 	}
 	
+	//This method add new entry to prop object
 	public void addEntry(String name, String number){
 		if (prop.getProperty(name) == null){
 			prop.put(name, number);
@@ -33,6 +35,8 @@ public class PhoneDirectory{
 			System.out.println("Already in the directory!");
 		}
 	}
+	
+	//This method delete entry from the prop object
 	public void deleteEntry(String name){
 		if (prop.getProperty(name) != null){
 			prop.remove(name);
@@ -41,6 +45,8 @@ public class PhoneDirectory{
 			System.out.println("Not in the directory");
 		}
 	}
+	
+	//This method gives the number for the given string
 	public String getNumber(String name){
 		String temp = prop.getProperty(name);
 		if (temp != null){
@@ -50,11 +56,14 @@ public class PhoneDirectory{
 			return "Not in the directory!";
 		}
 	}
-	public void ChangeEntry(String name, String number){
+	
+	//
+	public void changeEntry(String name, String number){
 		prop.setProperty(name, number);
 	}
 	
-	public void storeIt(String propFileName) throws IOException{
+	public void storeIt() throws IOException{
+		String propFileName = "/Users/vijay/Code/PhoneDirectory/src/main/resources/phone.properties";
 		Set temps;
 		String str, value;
 		temps = prop.keySet();
@@ -66,13 +75,12 @@ public class PhoneDirectory{
 			str = (String) itr.next();
 			value = prop.getProperty(str);
 			p.setProperty(str, value);
-			System.out.println(str +" " + p.getProperty(str));
 		}
 		p.store(output, null);
 		output.close();
 	}
 	
-	
+	//prints the content of prop
 	public void printStates(){
 		String str;
 		Set temps;

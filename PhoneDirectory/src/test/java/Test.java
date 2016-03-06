@@ -1,51 +1,25 @@
 package test.java;
 
+import main.resources.*;
 import main.java.PhoneDirectory;
 import java.io.*;
 import java.util.*;
 
 public class Test{
 	public static void main(String[] args) throws Exception{
-		String propFileName = "phone.properties";
-		PhoneDirectory p = new PhoneDirectory();
-		p.populateFromFile(propFileName);
-		p.printStates();
+
+		PhoneDirectory phoneBook = new PhoneDirectory();
+		phoneBook.populateFromFile();
+		phoneBook.addEntry("John", "2025678901");
+		phoneBook.addEntry("Anu", "5718907890");
+		phoneBook.changeEntry("Anu", "1245690909");
+		phoneBook.changeEntry("John", "5712792121");
+		phoneBook.addEntry("Biswa", "9091235678");
+		phoneBook.getNumber("Ashok");
+		phoneBook.deleteEntry("Sam");
 		
-		
-		//let's add some numbers 
-		String response = "y";
-		String name, number, res;
-		do {
-			System.out.println("Add (a) or Delete(d) or Get_Number(g) or Update(u): ");
-			Scanner scan = new Scanner(System.in);
-			res = scan.nextLine();
-			if (res.equals("a")){
-				System.out.println("Enter the name: ");
-				name = scan.nextLine();
-				System.out.println("Enter the number: ");
-				number = scan.nextLine();
-				p.addEntry(name, number);
-			} else if(res.equals("d")){
-				System.out.println("Enter the name you want to delete: ");
-				name = scan.nextLine();
-				p.deleteEntry(name);
-			} else if(res.equals("g")){
-				System.out.println("Enter the name you are looking for: ");
-				name = scan.nextLine();
-				System.out.println(p.getNumber(name));
-			} else if(res.equals("u")){
-				System.out.println("Enter the name you want to update: ");
-				name = scan.nextLine();
-				System.out.println("Enter the new phone number: ");
-				number = scan.nextLine();
-				p.ChangeEntry(name, number);
-			} 
-			System.out.println("You want to continue (y/n): ");
-			response = scan.nextLine();
-		} while(!response.equals("n"));
-		
-		p.storeIt("src/phone.properties");
-		p.printStates();
+		phoneBook.storeIt(); 
+		phoneBook.printStates();
 		
 	}
 }
