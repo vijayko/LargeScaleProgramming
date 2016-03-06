@@ -6,11 +6,16 @@ import java.io.*;
 import java.util.*;
 
 public class PhoneDirectory{
+	//I am using the prop field.
 	Properties prop = new Properties();
 	FileInputStream inputStream;
 	FileOutputStream output;
 	File f;
-	//This method populate the prop object with the content in the phone.properties
+	/*This method populate the prop object with the content in the phone.properties 
+	 * It takes no parameter
+	 * It simply loads the content of the phone.properties file 
+	 * 
+	 */
 	public void populateFromFile() throws IOException {
 		try {
 			inputStream = new FileInputStream("/Users/vijay/Code/PhoneDirectory/src/main/resources/phone.properties");
@@ -26,7 +31,10 @@ public class PhoneDirectory{
 		}
 	}
 	
-	//This method add new entry to prop object
+	/*This method add new entry to prop object
+	 * It takes two parameters name and number
+	 * and add it to the prop object
+	 */
 	public void addEntry(String name, String number){
 		if (prop.getProperty(name) == null){
 			prop.put(name, number);
@@ -36,7 +44,9 @@ public class PhoneDirectory{
 		}
 	}
 	
-	//This method delete entry from the prop object
+	/*This method delete entry from the prop object
+	 * this takes one parameter, name 
+	 */
 	public void deleteEntry(String name){
 		if (prop.getProperty(name) != null){
 			prop.remove(name);
@@ -57,11 +67,12 @@ public class PhoneDirectory{
 		}
 	}
 	
-	//
+	//Updates the entry of the prop 
 	public void changeEntry(String name, String number){
 		prop.setProperty(name, number);
 	}
 	
+	//it writes the content of prop to phone.properties
 	public void storeIt() throws IOException{
 		String propFileName = "/Users/vijay/Code/PhoneDirectory/src/main/resources/phone.properties";
 		Set temps;
