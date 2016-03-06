@@ -1,6 +1,6 @@
-package test;
+package test.java;
 
-import main.PhoneDirectory;
+import main.java.PhoneDirectory;
 import java.io.*;
 import java.util.*;
 
