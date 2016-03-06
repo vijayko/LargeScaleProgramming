@@ -60,9 +60,6 @@ public class PhoneDirectory{
 		temps = prop.keySet();
 		Properties p = new Properties();
 		Iterator itr = temps.iterator();
-		in = new FileInputStream(propFileName);
-		p.load(in);
-		in.close();
 		f = new File(propFileName);
 		output = new FileOutputStream(f);
 		while(itr.hasNext()){
@@ -74,6 +71,7 @@ public class PhoneDirectory{
 		p.store(output, null);
 		output.close();
 	}
+	
 	
 	public void printStates(){
 		String str;
